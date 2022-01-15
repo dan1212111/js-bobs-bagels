@@ -1,0 +1,26 @@
+Part 1 
+
+Class customerOrder
+/ create bagel - DONE
+/ create a bagelBasket - DONE 
+/ create a function that adds a bagel to the basket - DONE 
+/ create multiple bagels - DONE 
+
+/ add function that can remove an item from basket - DONE 
+
+
+Part 2
+
+/ add function to basket return message if max amount is reached - DONE
+/ have a changeable number for basket size - DONE
+/ add if statement "ITEM DOESN"T EXIST" in basket  - DONE 
+
+Part 3
+
+/ function to view bagels and price before selecting - DONE 
+/ add same bagel more then once - DONE 
+/ function to view the total sum of bagels - DONE
+
+
+extra
+/ link inventory
