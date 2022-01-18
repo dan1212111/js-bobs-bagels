@@ -24,3 +24,7 @@ Part 3
 
 extra
 / link inventory
+
+
+Extension 1 
+/ create a discount function + total sum - DONE 

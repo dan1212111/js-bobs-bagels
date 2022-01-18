@@ -90,7 +90,7 @@ describe("Basket", () => {
     // set up
     const expectedError = "BASKET IS FULL";
 
-    const basketCapacity = 6;
+    basket.basketCapacity = 5;
 
     // execute
 
@@ -210,9 +210,9 @@ describe("Basket", () => {
     expect(sameBagels.length).toEqual(4);
   });
 
-  it("total sum of bagels", () => {
+  it("sum of bagels", () => {
     // set up
-    const basketCapacity = 5;
+    basket.basketCapacity = 5;
     // execute
     basket.selectBagel("sesame", 2.99);
     basket.selectBagel("nutella", 3.99);
@@ -221,5 +221,43 @@ describe("Basket", () => {
     const sumOfBagels = basket.sumOfBagels();
     // verify
     expect(sumOfBagels).toEqual(11.96);
+  });
+
+  it("add favourite bagel more then once", () => {
+    // set up
+
+    // execute
+    basket.selectBagel("sesame", 2.99);
+    basket.selectBagel("sesame", 2.99);
+    basket.selectBagel("sesame", 2.99);
+    basket.selectBagel("sesame", 2.99);
+    const sameBagels = basket.customerOrder();
+    // verify
+    expect(sameBagels.length).toEqual(4);
+  });
+
+  it("sum of bagles with discount", () => {
+    // set up
+    basket.basketCapacity = 110;
+
+    for(let i=0; i<12; i++) {
+      basket.selectBagel("onion", 2.49); 
+    }
+    for(let i=0; i<30; i++) {
+      basket.selectBagel("plain", 3.99);
+    }
+    for(let i=0; i<39; i++) {
+      basket.selectBagel("honey", 2.49);  
+    }
+
+    // execute
+    const result = basket.sumOfBagels()
+    const resultOne = basket.totalDiscount()
+    const resultTwo = basket.totalCost()
+
+    // verify
+    expect(result).toEqual(246.69);
+    expect(resultOne).toEqual(27.9);
+    expect(resultTwo).toEqual(218.79);
   });
 });
