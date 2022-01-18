@@ -41,6 +41,10 @@ class Basket {
     let quantityOnionBagels = 0;
     let quantityPlainBagels = 0;
     let quantityHoneyBagels = 0;
+    let quantityCoffeeBagels = 0;
+    let quantityCoffeeAndPlainBagels = 0;
+    let moreCoffeeBagels = "false";
+    let morePlainBagels = "false";
 
     for (let i = 0; i < this.basket.length; i++) {
       if (this.basket[i].type === "onion") {
@@ -52,16 +56,49 @@ class Basket {
       if (this.basket[i].type === "honey") {
         quantityHoneyBagels += 1;
       }
+      if (this.basket[i].type === "coffee") {
+        quantityCoffeeBagels += 1;
+      }
     }
-    const discountOnionBagel = (Math.floor(quantityOnionBagels/6)) * 2.49
-    const discountPlainBagel = (Math.floor(quantityPlainBagels/12)) * 3.99
-    const discountHoneyBagel = (Math.floor(quantityHoneyBagels/6)) * 2.49
-    const totalBagelDiscount = discountOnionBagel + discountPlainBagel + discountHoneyBagel
-    return Number(totalBagelDiscount.toFixed(2))
+
+    //finding the highest common numb between the bagels
+    if (quantityCoffeeBagels >= 1 && quantityPlainBagels >= 1) {
+      if (quantityCoffeeBagels > quantityPlainBagels) {
+        moreCoffeeBagels = "true";
+      } else {
+        moreCoffeeBagels = "false";
+      }
+      if (quantityCoffeeBagels < quantityPlainBagels) {
+        morePlainBagels = "true";
+        quantityPlainBagels = quantityPlainBagels - quantityCoffeeBagels;
+      } else {
+        morePlainBagels = "false";
+      }
+    }
+
+    if (moreCoffeeBagels === "true") {
+      quantityCoffeeAndPlainBagels = quantityPlainBagels * 2;
+    }
+    if (morePlainBagels === "true") {
+      quantityCoffeeAndPlainBagels = quantityCoffeeBagels * 2;
+    }
+
+    const discountCoffeAndPlainBagel = quantityCoffeeAndPlainBagels * 1.25;
+    const discountOnionBagel = Math.floor(quantityOnionBagels / 6) * 2.49;
+    const discountPlainBagel = Math.floor(quantityPlainBagels / 12) * 3.99;
+    const discountHoneyBagel = Math.floor(quantityHoneyBagels / 6) * 2.49;
+
+    //Total sum
+    const totalBagelDiscount =
+      discountOnionBagel +
+      discountCoffeAndPlainBagel +
+      discountPlainBagel +
+      discountHoneyBagel;
+    return Number(totalBagelDiscount.toFixed(2));
   }
 
   totalCost() {
-    return this.sumOfBagels() - this.totalDiscount()
+    return this.sumOfBagels() - this.totalDiscount();
   }
 
   removeBagel(id) {

@@ -260,4 +260,29 @@ describe("Basket", () => {
     expect(resultOne).toEqual(27.9);
     expect(resultTwo).toEqual(218.79);
   });
+
+  it("mix discounts, best deal please!", () => {
+    // set up
+    basket.basketCapacity = 110;
+
+    for(let i=0; i<12; i++) {
+      basket.selectBagel("coffee", 2.49);
+    }
+    for(let i=0; i<14; i++) {
+      basket.selectBagel("plain", 3.99); 
+    }
+    for(let i=0; i<28; i++) {
+      basket.selectBagel("honey", 2.49);  
+    }
+
+    // execute
+    const result = basket.sumOfBagels()
+    const resultOne = basket.totalDiscount()
+    const resultTwo = basket.totalCost()
+
+    // verify
+    expect(result).toEqual(155.46);
+    expect(resultOne).toEqual(39.96);
+    expect(resultTwo).toEqual(115.5);
+  });
 });

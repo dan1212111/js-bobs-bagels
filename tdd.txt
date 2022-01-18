@@ -28,3 +28,6 @@ extra
 
 Extension 1 
 / create a discount function + total sum - DONE 
+/ add a mix discount without overlapping discounts- DONE
+
+Extension 2 
